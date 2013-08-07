@@ -20,11 +20,12 @@ namespace StringCalculatorKata
             Assert.AreEqual(result, expected);
         }
 
-        [Test]
-        public void Add_TwoNumberString_ReturnSum()
+        [TestCase("1,2", 3)]
+        [TestCase("2,3", 5)]
+        public void Add_TwoNumberString_ReturnSum(string value, int expected)
         {
-            int result = StringCalculator.Add("1,2");
-            Assert.AreEqual(result, 3);
+            int result = StringCalculator.Add(value);
+            Assert.AreEqual(result, expected);
         }
     }
 
@@ -36,7 +37,10 @@ namespace StringCalculatorKata
                 return HandleEmptyValue();
 
             if (value.Contains(","))
-                return 3;
+            {
+                var numbers = value.Split(',');
+                return HandleOneNumber(numbers[0]) + HandleOneNumber(numbers[1]);
+            }
 
             return HandleOneNumber(value);
         }
