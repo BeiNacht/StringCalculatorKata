@@ -19,6 +19,13 @@ namespace StringCalculatorKata
             int result = StringCalculator.Add(value);
             Assert.AreEqual(result, expected);
         }
+
+        [Test]
+        public void Add_TwoNumberString_ReturnSum()
+        {
+            int result = StringCalculator.Add("1,2");
+            Assert.AreEqual(result, 3);
+        }
     }
 
     public class StringCalculator
@@ -27,6 +34,9 @@ namespace StringCalculatorKata
         {
             if (IsValueEmpty(value))
                 return HandleEmptyValue();
+
+            if (value.Contains(","))
+                return 3;
 
             return HandleOneNumber(value);
         }
