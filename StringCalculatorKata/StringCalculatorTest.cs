@@ -25,10 +25,25 @@ namespace StringCalculatorKata
     {
         public static int Add(string value)
         {
-            if (value == "")
-                return 0;
+            if (IsValueEmpty(value))
+                return HandleEmptyValue();
 
+            return HandleOneNumber(value);
+        }
+
+        static int HandleOneNumber(string value)
+        {
             return int.Parse(value);
+        }
+
+        static int HandleEmptyValue()
+        {
+            return 0;
+        }
+
+        static bool IsValueEmpty(string value)
+        {
+            return value == "";
         }
     }
 }
