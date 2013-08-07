@@ -88,13 +88,33 @@ namespace StringCalculatorKata
         static int HandleOneNumber(string value)
         {
             int number = int.Parse(value);
-            if (number < 0)
-                throw new ArgumentOutOfRangeException();
+            if (IsNumberNegativ(number))
+                HandleNegativeNumber();
 
-            if (number > 1000)
-                return 0;
+            if (IsNumberOver1000(number))
+                return IgnoreNumber();
 
             return number;
+        }
+
+        static int IgnoreNumber()
+        {
+            return 0;
+        }
+
+        static bool IsNumberOver1000(int number)
+        {
+            return number > 1000;
+        }
+
+        static void HandleNegativeNumber()
+        {
+            throw new ArgumentOutOfRangeException();
+        }
+
+        static bool IsNumberNegativ(int number)
+        {
+            return number < 0;
         }
 
         static int HandleEmptyValue()
