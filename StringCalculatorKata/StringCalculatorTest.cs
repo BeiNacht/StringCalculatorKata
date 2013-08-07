@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework;
 
 namespace StringCalculatorKata
@@ -51,12 +52,22 @@ namespace StringCalculatorKata
             if (IsValueEmpty(value))
                 return HandleEmptyValue();
 
-            char[] delimiter = new char[] {',', '\n'};
+            var delimiter = new char[] {',', '\n'};
 
-            if (delimiter.Any(value.Contains))
-                return value.Split(delimiter).Sum(number => HandleOneNumber(number));
+            if (HasMultipleNumbers(value, delimiter))
+                return HandleMultipleNumbers(value, delimiter);
 
             return HandleOneNumber(value);
+        }
+
+        static int HandleMultipleNumbers(string value, char[] delimiter)
+        {
+            return value.Split(delimiter).Sum(number => HandleOneNumber(number));
+        }
+
+        static bool HasMultipleNumbers(string value, IEnumerable<char> delimiter)
+        {
+            return delimiter.Any(value.Contains);
         }
 
         static int HandleOneNumber(string value)
