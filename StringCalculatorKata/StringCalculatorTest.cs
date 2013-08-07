@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System.Linq;
+using NUnit.Framework;
 
 namespace StringCalculatorKata
 {
@@ -43,14 +44,13 @@ namespace StringCalculatorKata
             if (IsValueEmpty(value))
                 return HandleEmptyValue();
 
-            if (value.Contains(","))
+            char[] delimiter = new char[] {',', '\n'};
+
+            if (delimiter.Any(value.Contains))
             {
-                var numbers = value.Split(',');
+                var numbers = value.Split(delimiter);
                 return HandleOneNumber(numbers[0]) + HandleOneNumber(numbers[1]);
             }
-
-            if (value.Contains("\n"))
-                return 3;
 
             return HandleOneNumber(value);
         }
