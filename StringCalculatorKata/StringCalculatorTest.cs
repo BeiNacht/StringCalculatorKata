@@ -35,6 +35,13 @@ namespace StringCalculatorKata
             int result = StringCalculator.Add("1\n2");
             Assert.AreEqual(result, 3);
         }
+
+        [Test]
+        public void Add_MultipleNumberString_ReturnSum()
+        {
+            int result = StringCalculator.Add("1,2,3");
+            Assert.AreEqual(result, 6);
+        }
     }
 
     public class StringCalculator
@@ -47,10 +54,7 @@ namespace StringCalculatorKata
             char[] delimiter = new char[] {',', '\n'};
 
             if (delimiter.Any(value.Contains))
-            {
-                var numbers = value.Split(delimiter);
-                return HandleOneNumber(numbers[0]) + HandleOneNumber(numbers[1]);
-            }
+                return value.Split(delimiter).Sum(number => HandleOneNumber(number));
 
             return HandleOneNumber(value);
         }
