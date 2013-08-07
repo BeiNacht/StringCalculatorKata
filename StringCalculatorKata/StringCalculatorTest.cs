@@ -51,6 +51,13 @@ namespace StringCalculatorKata
         {
             int result = StringCalculator.Add("-1");
         }
+
+        [Test]
+        public void Add_NumberOver1000_IngnoreThem()
+        {
+            int result = StringCalculator.Add("1,1001");
+            Assert.AreEqual(result,1);
+        }
     }
 
     public class StringCalculator
@@ -83,6 +90,10 @@ namespace StringCalculatorKata
             int number = int.Parse(value);
             if (number < 0)
                 throw new ArgumentOutOfRangeException();
+
+            if (number > 1000)
+                return 0;
+
             return number;
         }
 
