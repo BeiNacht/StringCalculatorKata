@@ -11,13 +11,23 @@ namespace StringCalculatorKata
             int result = StringCalculator.Add("");
             Assert.AreEqual(result, 0);
         }
+
+        [Test]
+        public void Add_OneNumberString_ReturnNumber()
+        {
+            int result = StringCalculator.Add("1");
+            Assert.AreEqual(result, 1);
+        }
     }
 
     public class StringCalculator
     {
         public static int Add(string value)
         {
-            return 0;
+            if (value == "")
+                return 0;
+
+            return 1;
         }
     }
 }
