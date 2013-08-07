@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
 
@@ -43,6 +44,13 @@ namespace StringCalculatorKata
             int result = StringCalculator.Add("1,2,3");
             Assert.AreEqual(result, 6);
         }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void Add_NegativNumber_ThrowException()
+        {
+            int result = StringCalculator.Add("-1");
+        }
     }
 
     public class StringCalculator
@@ -72,7 +80,10 @@ namespace StringCalculatorKata
 
         static int HandleOneNumber(string value)
         {
-            return int.Parse(value);
+            int number = int.Parse(value);
+            if (number < 0)
+                throw new ArgumentOutOfRangeException();
+            return number;
         }
 
         static int HandleEmptyValue()
