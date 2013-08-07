@@ -12,11 +12,12 @@ namespace StringCalculatorKata
             Assert.AreEqual(result, 0);
         }
 
-        [Test]
-        public void Add_OneNumberString_ReturnNumber()
+        [TestCase("1", 1)]
+        [TestCase("2", 2)]
+        public void Add_OneNumberString_ReturnNumber(string value, int expected)
         {
-            int result = StringCalculator.Add("1");
-            Assert.AreEqual(result, 1);
+            int result = StringCalculator.Add(value);
+            Assert.AreEqual(result, expected);
         }
     }
 
@@ -27,7 +28,7 @@ namespace StringCalculatorKata
             if (value == "")
                 return 0;
 
-            return 1;
+            return int.Parse(value);
         }
     }
 }
